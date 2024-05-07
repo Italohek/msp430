@@ -23,11 +23,12 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;-------------------------------------------------------------------------------
 ; Main loop here
 ;-------------------------------------------------------------------------------
+; Falta comentar o c贸digo inteiro
 
-NUM			.equ 	3156					; Indicar o n鷐ero a ser convertido
+NUM			.equ 	3156						; Indicar o n煤mero a ser convertido
 
-			mov 	#NUM, R5				; R5 =  n鷐ero a ser convertido
-			mov 	#RESP, R6				; R6 = ponteiro para escrever a resposta
+			mov 	#NUM, R5					; R5 =  n煤mero a ser convertido
+			mov 	#RESP, R6					; R6 = ponteiro para escrever a resposta
 			call 	#ALG_ROM
 			jmp		$
 			nop
@@ -41,7 +42,7 @@ Retorna:
 			ret
 
 Milhas:
-        	cmp 	#1000, R5
+        		cmp 	#1000, R5
 			jn 		Novecentos
 			sub		#1000, R5
 			mov.b	#77, 0(R6)
@@ -61,11 +62,11 @@ Novecentos:
 
 Quinhentos:
 			clrn
-        	cmp 	#500, R5
-        	jn 		Quatrocentos
-        	sub 	#500, R5					; Subtraimos 1000 de R4
-        	mov.b 	#68, 0(R6)            	; Armazena o n鷐ero romano calculado
-        	inc 	R6                  	; Avan鏰 para o pr髕imo espa鏾 de mem髍ia
+        		cmp 	#500, R5
+        		jn 		Quatrocentos
+        		sub 	#500, R5					; Subtraimos 1000 de R4
+        		mov.b 	#68, 0(R6)            				; Armazena o n煤mero romano calculado
+        		inc 	R6                  				; Avan莽a para o pr贸ximo espa莽o de mem贸ria
 			jmp 	Quinhentos
 
 Quatrocentos:
@@ -82,10 +83,10 @@ Quatrocentos:
 Centenas:
 			clrn
 			cmp 	#100, R5
-        	jn 		Noventa
-        	sub 	#100, R5					; Subtraimos 1000 de R4
-        	mov.b 	#67, 0(R6)            	; Armazena o n鷐ero romano calculado
-        	inc 	R6                  	; Avan鏰 para o pr髕imo espa鏾 de mem髍ia
+        		jn 		Noventa
+        		sub 	#100, R5					; Subtraimos 1000 de R4
+        		mov.b 	#67, 0(R6)            				; Armazena o n煤mero romano calculado
+        		inc 	R6                  				; Avan莽a para o pr贸ximo espa莽o de mem贸ria
 			jmp 	Centenas
 
 Noventa:
@@ -103,9 +104,9 @@ Cinquenta:
 			clrn
 			cmp 	#50, R5
 			jn 		Quarenta
-        	sub 	#50, R5					; Subtraimos 1000 de R4
-        	mov.b 	#76, 0(R6)            	; Armazena o n鷐ero romano calculado
-        	inc 	R6                  	; Avan鏰 para o pr髕imo espa鏾 de mem髍ia
+        		sub 	#50, R5						; Subtraimos 1000 de R4
+        		mov.b 	#76, 0(R6)            				; Armazena o n煤mero romano calculado
+        		inc 	R6                  				; Avan莽a para o pr贸ximo espa莽o de mem贸ria
 			jmp 	Cinquenta
 
 Quarenta:
@@ -123,9 +124,9 @@ Dezenas:
 			clrn
 			cmp 	#10, R5
 			jn 		Nove
-        	sub 	#10, R5					; Subtraimos 1000 de R4
-        	mov.b 	#88, 0(R6)            	; Armazena o n鷐ero romano calculado
-        	inc 	R6                  	; Avan鏰 para o pr髕imo espa鏾 de mem髍ia
+        		sub 	#10, R5						; Subtraimos 1000 de R4
+        		mov.b 	#88, 0(R6)            				; Armazena o n煤mero romano calculado
+        		inc 	R6                  				; Avan莽a para o pr贸ximo espa莽o de mem贸ria
 			jmp 	Dezenas
 
 Nove:
@@ -143,9 +144,9 @@ Cinco:
 			clrn
 			cmp 	#5, R5
 			jn 		Quatro
-        	sub 	#5, R5					; Subtraimos 1000 de R4
-        	mov.b 	#86, 0(R6)            	; Armazena o n鷐ero romano calculado
-        	inc 	R6                  	; Avan鏰 para o pr髕imo espa鏾 de mem髍ia
+        		sub 	#5, R5						; Subtraimos 1000 de R4
+        		mov.b 	#86, 0(R6)            				; Armazena o n煤mero romano calculado
+        		inc 	R6                  				; Avan莽a para o pr贸ximo espa莽o de mem贸ria
 			jmp 	Cinco
 
 Quatro:
@@ -162,10 +163,10 @@ Quatro:
 Um:
 			cmp 	#1, R5
 			jn 		Retorna
-        	sub 	#1, R5				; Subtraimos 1000 de R4
-        	jn 		Retorna
-        	mov.b 	#73, 0(R6)            	; Armazena o n鷐ero romano calculado
-        	inc 	R6                  	; Avan鏰 para o pr髕imo espa鏾 de mem髍ia
+        		sub 	#1, R5						; Subtraimos 1000 de R4
+        		jn 		Retorna
+        		mov.b 	#73, 0(R6)            				; Armazena o n煤mero romano calculado
+        		inc 	R6                  				; Avan莽a para o pr贸ximo espa莽o de mem贸ria
 			jmp 	Um
 			nop
 
