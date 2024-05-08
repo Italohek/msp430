@@ -25,7 +25,7 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;-------------------------------------------------------------------------------
 ; Falta comentar o código inteiro
 
-NUM			.equ 	3156						; Indicar o número a ser convertido
+NUM			.equ 	13						; Indicar o número a ser convertido
 
 			mov 	#NUM, R5					; R5 =  número a ser convertido
 			mov 	#RESP, R6					; R6 = ponteiro para escrever a resposta
@@ -39,12 +39,13 @@ ALG_ROM:
 			call 	#Milhas
 
 Retorna:
+			mov.b 	#48, 0(R6)
 			ret
 
 Milhas:
         		cmp 	#1000, R5
-			jn 		Novecentos
-			sub		#1000, R5
+			jn 	Novecentos
+			sub	#1000, R5
 			mov.b	#77, 0(R6)
 			inc 	R6
 			jmp 	Milhas
@@ -52,8 +53,8 @@ Milhas:
 Novecentos:
 			clrn
 			cmp 	#900, R5
-			jn 		Quinhentos
-			sub		#900, R5
+			jn 	Quinhentos
+			sub	#900, R5
 			mov.b 	#67, 0(R6)
 			inc 	R6
 			mov.b 	#77, 0(R6)
@@ -63,7 +64,7 @@ Novecentos:
 Quinhentos:
 			clrn
         		cmp 	#500, R5
-        		jn 		Quatrocentos
+        		jn 	Quatrocentos
         		sub 	#500, R5					; Subtraimos 1000 de R4
         		mov.b 	#68, 0(R6)            				; Armazena o número romano calculado
         		inc 	R6                  				; Avança para o próximo espaço de memória
@@ -72,8 +73,8 @@ Quinhentos:
 Quatrocentos:
 			clrn
 			cmp 	#400, R5
-			jn 		Centenas
-			sub		#400, R5
+			jn 	Centenas
+			sub	#400, R5
 			mov.b 	#67, 0(R6)
 			inc 	R6
 			mov.b 	#68, 0(R6)
@@ -83,7 +84,7 @@ Quatrocentos:
 Centenas:
 			clrn
 			cmp 	#100, R5
-        		jn 		Noventa
+        		jn 	Noventa
         		sub 	#100, R5					; Subtraimos 1000 de R4
         		mov.b 	#67, 0(R6)            				; Armazena o número romano calculado
         		inc 	R6                  				; Avança para o próximo espaço de memória
@@ -92,8 +93,8 @@ Centenas:
 Noventa:
 			clrn
 			cmp 	#90, R5
-			jn 		Cinquenta
-			sub		#90, R5
+			jn 	Cinquenta
+			sub	#90, R5
 			mov.b 	#88, 0(R6)
 			inc 	R6
 			mov.b 	#67, 0(R6)
@@ -103,7 +104,7 @@ Noventa:
 Cinquenta:
 			clrn
 			cmp 	#50, R5
-			jn 		Quarenta
+			jn 	Quarenta
         		sub 	#50, R5						; Subtraimos 1000 de R4
         		mov.b 	#76, 0(R6)            				; Armazena o número romano calculado
         		inc 	R6                  				; Avança para o próximo espaço de memória
@@ -112,8 +113,8 @@ Cinquenta:
 Quarenta:
 			clrn
 			cmp 	#40, R5
-			jn 		Dezenas
-			sub		#40, R5
+			jn 	Dezenas
+			sub	#40, R5
 			mov.b 	#88, 0(R6)
 			inc 	R6
 			mov.b 	#76, 0(R6)
@@ -123,7 +124,7 @@ Quarenta:
 Dezenas:
 			clrn
 			cmp 	#10, R5
-			jn 		Nove
+			jn 	Nove
         		sub 	#10, R5						; Subtraimos 1000 de R4
         		mov.b 	#88, 0(R6)            				; Armazena o número romano calculado
         		inc 	R6                  				; Avança para o próximo espaço de memória
@@ -132,8 +133,8 @@ Dezenas:
 Nove:
 			clrn
 			cmp 	#9, R5
-			jn 		Cinco
-			sub		#9, R5
+			jn 	Cinco
+			sub	#9, R5
 			mov.b 	#73, 0(R6)
 			inc 	R6
 			mov.b 	#88, 0(R6)
@@ -143,7 +144,7 @@ Nove:
 Cinco:
 			clrn
 			cmp 	#5, R5
-			jn 		Quatro
+			jn 	Quatro
         		sub 	#5, R5						; Subtraimos 1000 de R4
         		mov.b 	#86, 0(R6)            				; Armazena o número romano calculado
         		inc 	R6                  				; Avança para o próximo espaço de memória
@@ -152,8 +153,8 @@ Cinco:
 Quatro:
 			clrn
 			cmp 	#4, R5
-			jn 		Um
-			sub		#4, R5
+			jn 	Um
+			sub	#4, R5
 			mov.b 	#73, 0(R6)
 			inc 	R6
 			mov.b 	#86, 0(R6)
@@ -162,9 +163,9 @@ Quatro:
 
 Um:
 			cmp 	#1, R5
-			jn 		Retorna
+			jn 	Retorna
         		sub 	#1, R5						; Subtraimos 1000 de R4
-        		jn 		Retorna
+        		jn 	Retorna
         		mov.b 	#73, 0(R6)            				; Armazena o número romano calculado
         		inc 	R6                  				; Avança para o próximo espaço de memória
 			jmp 	Um
