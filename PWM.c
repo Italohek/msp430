@@ -5,25 +5,13 @@ void config_leds(void);
 void config_p12(void);
 void config_timer(void);
 
-// Variável volátil para armazenar a fase do timer
-volatile int fase = 0;
-
 int main(void){
-    // Desativa o watchdog timer
-    WDTCTL = WDTPW | WDTHOLD;
-
-    // Configuração dos LEDs
-    config_leds();
-
-    // Configuração do P1.2 como saída
-    config_p12();
-
-    // Configuração do Timer
-    config_timer();
-
+    WDTCTL = WDTPW | WDTHOLD;  // Desativa o watchdog timer
+    config_leds(); // Configuração dos LEDs
+    config_p12(); // Configuração do P1.2 como saída
+    config_timer(); // Configuração do Timer
     while(1); // Loop infinito
-
-    return 0;
+        return 0;
 }
 
 // Configuração do LED como saída
