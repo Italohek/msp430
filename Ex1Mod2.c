@@ -20,7 +20,7 @@ void configleds() {
     P4DIR |= BIT7; //Led verde é saída
     P4OUT &= ~BIT7; //Led verde começa apagado
 
-    P2DIR &= ~BIT1; //Botão esqueda é entrada
+    P2DIR &= ~BIT1; //Botão esquerdo é entrada
     P2REN |= BIT1; //Habiltia o resistor do botão 1
     P2OUT |= BIT1; //Habilita pullup, ou seja, estado alto quando não pressionado
 }
