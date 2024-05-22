@@ -157,7 +157,7 @@ void config_leds(void){
     PMAPKEYID = 0X02D52; //Escrever chave
     P4MAP7 = PM_TB0CCR1A; //TB0.1 mapeado para P4.7
 }
-    
+
 
 // Incrementa posição do servo
 void up_pos(void) {
@@ -201,50 +201,43 @@ void instructions(int tecla){
             break;
 
         case _3_x_1:
-            down_pos();
+            TB0CCR1 = POT100 * 0.1;
             break;
 
         case _3_x_2:
-            TB0CCR1 = 0;
-            up_pos();
+            TB0CCR1 = POT100 * 0.2;
             break;
 
          case _3_x_3:
-             TB0CCR1 = POT100 * 0.1;
-             break;
+            TB0CCR1 = POT100 * 0.3;
+            break;
 
          case _4_x_1:
-             TB0CCR1 = POT100 * 0.2;
-             pos = 0;
-             TA2CCR2=T500us;
+             TB0CCR1 = POT100 * 0.4;
              break;
 
          case _4_x_2:
-             TB0CCR1 = POT100 * 0.3;
-             pos = 9;
-             TA2CCR2=T500us+(pos*P10GRAUS);
-             break;
-
-         case _4_x_3:
-             TB0CCR1 = POT100 * 0.4;
-             pos = 18;
-             TA2CCR2=T500us+(pos*P10GRAUS);
-             break;
-
-         case _5_x_2:
              TB0CCR1 = POT100 * 0.5;
              break;
 
-         case _6_x_1:
+         case _4_x_3:
              TB0CCR1 = POT100 * 0.6;
              break;
 
-         case _6_x_2:
+         case _5_x_2:
              TB0CCR1 = POT100 * 0.7;
              break;
 
-         case _6_x_3:
+         case _6_x_1:
+             down_pos();
+             break;
+
+         case _6_x_2:
              TB0CCR1 = POT100 * 0.8;
+             break;
+
+         case _6_x_3:
+             up_pos();
              break;
 
          case _7_x_2:
