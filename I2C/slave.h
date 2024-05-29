@@ -2,7 +2,7 @@
  * slave.h
  *
  *  Created on: 28 de mai de 2024
- *      Author: Hekazinho
+ *      Author: UNB
  */
 
 #ifndef SLAVE_H_
@@ -15,7 +15,7 @@ void USCI_B1_rx(void);
 void USCI_B1_tx(void);
 
 // Variáveis globais
-volatile char b1_vet(MAX_B1); // Vetor para receber os dados
+volatile char b1_vet[MAX_B1]; // Vetor para receber os dados
 volatile char b1; // Indexador para o vetor
 volatile char b1_cont; // Contador para quando for transmitir dados
 
